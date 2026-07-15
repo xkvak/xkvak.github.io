@@ -2,92 +2,102 @@
 layout: none
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="{{ '/css/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  <link rel="stylesheet" href="{{ '/css/syntax.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  <link rel="icon" href="/favicon.ico">
-  <meta name="description" content="{{ page.description }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <title>{{ page.title }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ '/css/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/css/syntax.css' | relative_url }}?v={{ site.time | date: '%s' }}"
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content="{{ page.description }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-        displayMath: [ ['$$', '$$'], ['\\[', '\\]'] ],
-        processEscapes: true
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'pre', 'code'],
-        ignoreHtmlClass: 'tex2jax_ignore',
-        processHtmlClass: 'tex2jax_process'
-      }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+          processEscapes: true,
+        },
+        options: {
+          skipHtmlTags: ["script", "noscript", "style", "pre", "code"],
+          ignoreHtmlClass: "tex2jax_ignore",
+          processHtmlClass: "tex2jax_process",
+        },
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <center>
+          <a href="/">Home</a> · <a href="/about.html">About</a> ·
+          <a href="/blog.html">Blog</a> ·
+          <a href="/services.html">Services</a>
+        </center>
+      </nav>
+    </header>
 
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <nav>
+    <hr />
+
+    <!-- Main Content -->
+    <main>{{ content }}</main>
+
+    <!-- Footer -->
+    <footer>
+      <hr />
       <center>
-        <a href="/">Home</a> ·
-        <a href="/about.html">About</a> ·
-        <a href="/blog.html">Blog</a> ·
-        <a href="/services.html">Services</a> ·
+        <small>
+          <a href="/feed.xml">RSS</a> ·
+          <a href="{{ site.github_link }}">GitHub</a>
+        </small>
       </center>
-    </nav>
-  </header>
+    </footer>
 
-  <hr>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const images = document.querySelectorAll("main img");
+        images.forEach((img) => {
+          img.addEventListener("click", function () {
+            const modal = document.createElement("div");
+            modal.classList.add("modal");
+            const modalContent = document.createElement("img");
+            modalContent.classList.add("modal-content");
+            modalContent.src = this.src;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
 
-  <!-- Main Content -->
-  <main>
-    {{ content }}
-  </main>
+            const closeModal = function () {
+              document.body.removeChild(modal);
+              document.removeEventListener("keydown", handleKeydown);
+            };
 
-  <!-- Footer -->
-  <footer>
-    <hr>
-    <center><small>
-      <a href="/feed.xml">RSS</a> · 
-      <a href="{{ site.github_link }}">GitHub</a> · 
-    </small></center>
-  </footer>
+            modal.addEventListener("click", closeModal);
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const images = document.querySelectorAll("main img");
-      images.forEach(img => {
-        img.addEventListener("click", function() {
-          const modal = document.createElement("div");
-          modal.classList.add("modal");
-          const modalContent = document.createElement("img");
-          modalContent.classList.add("modal-content");
-          modalContent.src = this.src;
-          modal.appendChild(modalContent);
-          document.body.appendChild(modal);
+            const handleKeydown = function (event) {
+              if (event.key === "Escape") {
+                closeModal();
+              }
+            };
 
-          const closeModal = function() {
-            document.body.removeChild(modal);
-            document.removeEventListener("keydown", handleKeydown);
-          };
-          
-          modal.addEventListener("click", closeModal);
-          
-          const handleKeydown = function(event) {
-            if (event.key === "Escape") {
-              closeModal();
-            }
-          };
-
-          document.addEventListener("keydown", handleKeydown);
+            document.addEventListener("keydown", handleKeydown);
+          });
         });
       });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

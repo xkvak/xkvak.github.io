@@ -1,30 +1,31 @@
 ---
 layout: default
 title: Alex Kvak
-description: Hello, world, I'm Alex, and this is my blog, where I talk about math, machine learning, and other things like cooking. 
+description: Hello, world, I'm Alex, and this is my blog, where I talk about math, machine learning, and other things like cooking.
 ---
 
 {% assign totalPosts = site.posts | size %}
 {% assign totalWords = 0 %}
 
 {% for post in site.posts %}
-  {% assign postWords = post.content | number_of_words %}
-  {% assign totalWords = totalWords | plus: postWords %}
+{% assign postWords = post.content | number_of_words %}
+{% assign totalWords = totalWords | plus: postWords %}
 {% endfor %}
 
-<h1>Hello, I'm Alex</h1>
+# 안녕하세요, 저는 곽준호입니다.
 
-Hi, welcome to my website! I use this tiny part of the internet to share my thoughts about machine learning, maths, cooking, philosophy, and other random things. I write for several reasons. Since 2026 I've wrote {{ totalPosts }} posts and {{ totalWords }} words.
+이곳에 오신 것을 진심으로 환영합니다. 저는 넓디넓은 인터넷 속에서 조그마한 이곳을 관리하며 여러 가지 주제에 대한 제 생각을 글로 남기고 있습니다. 제가 글을 쓰는 몇 가지 이유에 대해서 [이곳](https://xkvak.github.io/2026/07/15/내가-글을-쓰는-이유.html)에 설명을 해두었으니, 저에 대해 궁금하시면 읽어보세요. 저는 2026년부터 지금까지 {{ totalPosts }}개의 글을 올렸고, 총 {{ totalWords }}자를 작성했습니다.
 
-I try to keep the site style quite minimal because I want to focus on the content and not on the container. Some people have told me it's too minimal, but I don't care. If you like it you can find the source code [in my repo](https://github.com/duffyishere/duffyishere.github.io/). Feel free to use it as you prefer.
+저는 이곳을 최대한 깔끔한 디자인으로 유지하려고 합니다. 외관보다는 내용물에 집중하고 있기 때문입니다. 어떤 사람은 너무 간결하다고 생각하실 수 있지만 어쩔 수 없습니다. 혹시 이곳의 소스 코드가 필요하시다면 제 [저장소](https://github.com/xkvak/xkvak.github.io/)에서 찾을 수 있습니다. 마음껏 사용해 주세요.
 
 ---
 
-<h2>Latest posts</h2>
+## Latest posts
 
 {% assign postCount = 0 %}
 {% for post in site.posts %}
 {% if postCount < 5 %}
+
   <li>
     <span class="post-date">{{ post.date | date: "%b %d %Y" }}</span> · <a href="{{ post.url }}">{{ post.title }}</a>
   </li>
@@ -34,10 +35,11 @@ I try to keep the site style quite minimal because I want to focus on the conten
 
 ---
 
-<h2>Favourite posts</h2>
+## Favourite posts
 
 {% for post in site.posts %}
 {% if post.favourite %}
+
   <li>
     <span class="post-date">{{ post.date | date: "%b %d %Y" }}</span> · <a href="{{ post.url }}">{{ post.title }}</a>
   </li>
