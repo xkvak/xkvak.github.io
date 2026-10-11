@@ -117,6 +117,24 @@ progress::-moz-progress-bar {
 
 main img {
   cursor: zoom-in;
+  max-width: 100%; /* Keep images inside the content width */
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  display: block;
+  overflow-x: auto; /* Scroll wide tables on small screens */
+}
+
+th, td {
+  border: 1px solid #cccccc;
+  padding: 4px 12px;
+}
+
+th {
+  font-weight: 700;
+  background-color: #e6f2ff;
 }
 
 .modal {
